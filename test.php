@@ -1,6 +1,7 @@
 <?php
 
 require 'includes/config.php';
-require 'includes/security.php';
+require 'includes/functions.php';
+require 'includes/auth.php';
 
-echo csrf_token();
+var_dump(checkLogin());
