@@ -6,7 +6,7 @@
  * ----------------------------------------------------------
  * File : layouts/dashboard/sidebar.php
  * Version : 1.0.0
- * ==========================================================
+ * ==========================================================<a href="<?= route('owner.dashboard') ?>">
  */
 
 $currentPage = basename($_SERVER['PHP_SELF']);
@@ -15,56 +15,44 @@ $menus = [
 
     [
         'title' => 'Dashboard',
-        'icon'  => 'bi-grid-fill',
-        'url'   => 'dashboard.php'
+        'route' => 'owner.dashboard',
+        'icon' => 'bi-grid-fill'
     ],
 
     [
         'title' => 'Categories',
-        'icon'  => 'bi-folder2-open',
-        'url'   => 'categories.php'
+        'route' => 'categories.index',
+        'icon' => 'bi-folder2-open'
     ],
 
     [
         'title' => 'Menus',
-        'icon'  => 'bi-cup-hot',
-        'url'   => 'menu.php'
-    ],
-
-    [
-        'title' => 'QR Code',
-        'icon'  => 'bi-qr-code',
-        'url'   => 'qr.php'
+        'route' => 'menus.index',
+        'icon' => 'bi-cup-hot'
     ],
 
     [
         'title' => 'Orders',
-        'icon'  => 'bi-bag-check',
-        'url'   => 'orders.php'
+        'route' => 'orders.index',
+        'icon' => 'bi-bag-check'
     ],
 
     [
         'title' => 'Customers',
-        'icon'  => 'bi-people',
-        'url'   => 'customers.php'
+        'route' => 'customers.index',
+        'icon' => 'bi-people'
     ],
 
     [
         'title' => 'Restaurant',
-        'icon'  => 'bi-shop',
-        'url'   => 'restaurant.php'
-    ],
-
-    [
-        'title' => 'Settings',
-        'icon'  => 'bi-gear',
-        'url'   => 'settings.php'
+        'route' => 'restaurant.settings',
+        'icon' => 'bi-shop'
     ],
 
     [
         'title' => 'Profile',
-        'icon'  => 'bi-person-circle',
-        'url'   => 'profile.php'
+        'route' => 'profile.index',
+        'icon' => 'bi-person-circle'
     ]
 
 ];
@@ -87,11 +75,7 @@ $menus = [
 
         <?php foreach ($menus as $menu): ?>
 
-            <a
-
-                href="<?= e($menu['url']) ?>"
-
-                class="<?= $currentPage == $menu['url'] ? 'active' : '' ?>">
+            <a href="<?= route($menu['route']) ?>" class="<?= isCurrentRoute($menu['route']) ? 'active' : '' ?>">
 
                 <i class="bi <?= e($menu['icon']) ?>"></i>
 
@@ -109,7 +93,7 @@ $menus = [
 
     <div class="mk-sidebar-footer">
 
-        <a href="../logout.php">
+        <a href="<?= route('logout') ?>">
 
             <i class="bi bi-box-arrow-right"></i>
 

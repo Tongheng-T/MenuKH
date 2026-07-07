@@ -13,7 +13,7 @@ require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/json.php';
 require_once __DIR__ . '/includes/functions.php';
 require_once __DIR__ . '/includes/security.php';
-
+require_once __DIR__ . '/includes/auth.php';
 /*
 |--------------------------------------------------------------------------
 | Redirect if logged in

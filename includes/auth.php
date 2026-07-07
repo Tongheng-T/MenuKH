@@ -10,7 +10,7 @@
 /**
  * Check Login
  */
-function checkLogin(): bool
+function isLoggedIn(): bool
 {
     return isset($_SESSION['user']);
 }
@@ -31,13 +31,13 @@ function login(array $user): void
     session_regenerate_id(true);
 
     $_SESSION['user'] = [
-        'id'              => $user['id'],
-        'restaurant_id'   => $user['restaurant_id'],
+        'id' => $user['id'],
+        'restaurant_id' => $user['restaurant_id'],
         'restaurant_name' => $user['restaurant_name'],
-        'owner_name'      => $user['owner_name'],
-        'email'           => $user['email'],
-        'role'            => $user['role'],
-        'plan'            => $user['plan']
+        'owner_name' => $user['owner_name'],
+        'email' => $user['email'],
+        'role' => $user['role'],
+        'plan' => $user['plan']
     ];
 }
 
@@ -64,6 +64,8 @@ function logout(): void
     }
 
     session_destroy();
+
+    redirect(url('login.php'));
 }
 
 /**
@@ -71,8 +73,8 @@ function logout(): void
  */
 function requireLogin(): void
 {
-    if (!checkLogin()) {
-        redirect('../login.php');
+    if (!isLoggedIn()) {
+        redirect(APP_URL . '/login.php');
     }
 }
 

@@ -2,20 +2,20 @@
 /**
  * ==========================================================
  * MenuKH
- * Categories
+ * Categories Module
  * ----------------------------------------------------------
- * File : owner/categories.php
+ * File : owner/categories/index.php
  * Version : 1.0.0
  * ==========================================================
  */
 
-require_once __DIR__ . '/../includes/config.php';
-require_once __DIR__ . '/../includes/functions.php';
-require_once __DIR__ . '/../includes/security.php';
-require_once __DIR__ . '/../includes/auth.php';
-require_once __DIR__ . '/../includes/json.php';
-require_once __DIR__ . '/../includes/restaurant.php';
-
+require_once __DIR__ . '/../../includes/config.php';
+require_once __DIR__ . '/../../includes/functions.php';
+require_once __DIR__ . '/../../includes/security.php';
+require_once __DIR__ . '/../../includes/auth.php';
+require_once __DIR__ . '/../../includes/json.php';
+require_once __DIR__ . '/../../includes/restaurant.php';
+require_once __DIR__ . '/../../includes/routes.php';
 /*
 |--------------------------------------------------------------------------
 | Authentication
@@ -23,20 +23,16 @@ require_once __DIR__ . '/../includes/restaurant.php';
 */
 
 if (!isLoggedIn()) {
-
-    redirect('../login.php');
-
+    redirect('../../login.php');
 }
 
-if ($_SESSION['user']['role'] !== 'owner') {
-
-    redirect('../login.php');
-
+if (($_SESSION['user']['role'] ?? '') !== 'owner') {
+    redirect('../../login.php');
 }
 
 /*
 |--------------------------------------------------------------------------
-| Page Title
+| Page
 |--------------------------------------------------------------------------
 */
 
@@ -78,40 +74,44 @@ $categories = JsonDB::orderBy(
 if ($keyword !== '') {
 
     $categories = array_filter(
-
         $categories,
-
         function ($category) use ($keyword) {
 
             return stripos(
-
                 $category['name'] ?? '',
-
                 $keyword
-
             ) !== false;
 
         }
-
     );
 
 }
 
 /*
 |--------------------------------------------------------------------------
-| Total
+| Statistics
 |--------------------------------------------------------------------------
 */
 
 $totalCategories = count($categories);
 
+$activeCategories = count(
+    array_filter(
+        $categories,
+        fn($row) => ($row['status'] ?? '') === 'active'
+    )
+);
+
+$inactiveCategories =
+    $totalCategories - $activeCategories;
+
 /*
 |--------------------------------------------------------------------------
-| Empty State
+| Flash Message
 |--------------------------------------------------------------------------
 */
 
-$hasCategories = $totalCategories > 0;
+$flash = getFlash();
 
 /*
 |--------------------------------------------------------------------------
@@ -119,7 +119,7 @@ $hasCategories = $totalCategories > 0;
 |--------------------------------------------------------------------------
 */
 
-require_once __DIR__ . '/../layouts/dashboard/header.php';
+require_once __DIR__ . '/../../layouts/dashboard/header.php';
 ?>
 
 <div class="container-fluid">
@@ -136,16 +136,14 @@ require_once __DIR__ . '/../layouts/dashboard/header.php';
 
         <p class="text-secondary mb-0">
 
-            Manage your restaurant categories.
+            Organize your restaurant menu categories.
 
         </p>
 
     </div>
 
     <a
-
-        href="category_create.php"
-
+        href="create.php"
         class="btn btn-primary">
 
         <i class="bi bi-plus-lg"></i>
@@ -156,7 +154,93 @@ require_once __DIR__ . '/../layouts/dashboard/header.php';
 
 </div>
 
-<div class="card shadow-sm border-0 rounded-4">
+<?php if($flash): ?>
+
+<div class="alert alert-<?= e($flash['type']) ?>">
+
+    <?= e($flash['message']) ?>
+
+</div>
+
+<?php endif; ?>
+
+<div class="row mb-4">
+
+    <div class="col-md-4">
+
+        <div class="card border-0 shadow-sm rounded-4">
+
+            <div class="card-body">
+
+                <small class="text-secondary">
+
+                    Total Categories
+
+                </small>
+
+                <h2 class="fw-bold mb-0">
+
+                    <?= $totalCategories ?>
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card border-0 shadow-sm rounded-4">
+
+            <div class="card-body">
+
+                <small class="text-secondary">
+
+                    Active
+
+                </small>
+
+                <h2 class="fw-bold text-success mb-0">
+
+                    <?= $activeCategories ?>
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card border-0 shadow-sm rounded-4">
+
+            <div class="card-body">
+
+                <small class="text-secondary">
+
+                    Inactive
+
+                </small>
+
+                <h2 class="fw-bold text-danger mb-0">
+
+                    <?= $inactiveCategories ?>
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card border-0 shadow-sm rounded-4">
 
 <div class="card-body">
 
@@ -164,7 +248,7 @@ require_once __DIR__ . '/../layouts/dashboard/header.php';
 method="GET"
 class="row g-3 mb-4">
 
-<div class="col-md-4">
+<div class="col-md-5">
 
 <input
 
@@ -193,28 +277,24 @@ Search
 
 </div>
 
-</form>
-<?php if ($hasCategories): ?>
+<div class="col-auto">
 
-<div class="d-flex justify-content-between align-items-center mb-3">
+<a
+href="index.php"
+class="btn btn-outline-secondary">
 
-    <div>
+Reset
 
-        <strong>
-
-            Total Categories:
-
-        </strong>
-
-        <?= $totalCategories ?>
-
-    </div>
+</a>
 
 </div>
 
+</form>
+<?php if ($totalCategories > 0): ?>
+
 <div class="table-responsive">
 
-<table class="table align-middle">
+<table class="table table-hover align-middle">
 
 <thead>
 
@@ -232,7 +312,7 @@ Category
 
 </th>
 
-<th width="150">
+<th width="120">
 
 Status
 
@@ -244,7 +324,7 @@ Sort
 
 </th>
 
-<th width="180" class="text-end">
+<th width="170" class="text-end">
 
 Action
 
@@ -256,7 +336,7 @@ Action
 
 <tbody>
 
-<?php foreach ($categories as $index => $category): ?>
+<?php foreach($categories as $index => $category): ?>
 
 <tr>
 
@@ -270,19 +350,21 @@ Action
 
 <div class="d-flex align-items-center gap-3">
 
-<?php if (!empty($category['image'])): ?>
+<?php if(!empty($category['image'])): ?>
 
 <img
+
 src="<?= e($category['image']) ?>"
-width="48"
-height="48"
-class="rounded object-fit-cover">
+
+class="rounded"
+
+style="width:52px;height:52px;object-fit:cover;">
 
 <?php else: ?>
 
 <div
-class="bg-primary text-white rounded d-flex align-items-center justify-content-center"
-style="width:48px;height:48px;">
+class="rounded bg-primary text-white d-flex justify-content-center align-items-center"
+style="width:52px;height:52px;">
 
 <i class="bi bi-folder2-open"></i>
 
@@ -298,7 +380,7 @@ style="width:48px;height:48px;">
 
 </div>
 
-<?php if (!empty($category['description'])): ?>
+<?php if(!empty($category['description'])): ?>
 
 <small class="text-secondary">
 
@@ -316,7 +398,7 @@ style="width:48px;height:48px;">
 
 <td>
 
-<?php if (($category['status'] ?? '') === 'active'): ?>
+<?php if(($category['status'] ?? '') === 'active'): ?>
 
 <span class="badge bg-success">
 
@@ -344,21 +426,39 @@ Inactive
 
 <td class="text-end">
 
-<a
-href="category_edit.php?id=<?= urlencode($category['id']) ?>"
-class="btn btn-sm btn-outline-primary">
+<div class="btn-group">
 
-<i class="bi bi-pencil"></i>
+<a
+
+href="edit.php?id=<?= urlencode($category['id']) ?>"
+
+class="btn btn-outline-primary btn-sm">
+
+<i class="bi bi-pencil-square"></i>
 
 </a>
 
 <a
-href="category_delete.php?id=<?= urlencode($category['id']) ?>"
-class="btn btn-sm btn-outline-danger btn-delete">
+
+href="status.php?id=<?= urlencode($category['id']) ?>"
+
+class="btn btn-outline-warning btn-sm">
+
+<i class="bi bi-arrow-repeat"></i>
+
+</a>
+
+<a
+
+href="delete.php?id=<?= urlencode($category['id']) ?>"
+
+class="btn btn-outline-danger btn-sm btn-delete">
 
 <i class="bi bi-trash"></i>
 
 </a>
+
+</div>
 
 </td>
 
@@ -377,8 +477,8 @@ class="btn btn-sm btn-outline-danger btn-delete">
 <div class="text-center py-5">
 
 <div
-class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center mb-4"
-style="width:90px;height:90px;">
+class="bg-light rounded-circle d-inline-flex justify-content-center align-items-center mb-4"
+style="width:100px;height:100px;">
 
 <i class="bi bi-folder2-open fs-1 text-primary"></i>
 
@@ -386,18 +486,20 @@ style="width:90px;height:90px;">
 
 <h3 class="fw-bold">
 
-No Categories Yet
+No Categories Found
 
 </h3>
 
-<p class="text-secondary">
+<p class="text-secondary mb-4">
 
-Create your first category to organize your menu.
+Create your first category to organize your restaurant menu.
 
 </p>
 
 <a
-href="category_create.php"
+
+href="create.php"
+
 class="btn btn-primary">
 
 <i class="bi bi-plus-lg"></i>
@@ -413,12 +515,13 @@ Create First Category
 </div>
 
 </div>
-
 <script>
 /**
  * ==========================================================
- * MenuKH Categories
+ * MenuKH
+ * Categories Module
  * ----------------------------------------------------------
+ * File : owner/categories/index.php
  * Version : 1.0.0
  * ==========================================================
  */
@@ -448,29 +551,7 @@ if (searchInput && searchInput.value !== '') {
 
 /*
 |--------------------------------------------------------------------------
-| Confirm Delete
-|--------------------------------------------------------------------------
-*/
-
-document.querySelectorAll('.btn-delete').forEach(button => {
-
-    button.addEventListener('click', function (event) {
-
-        if (!confirm(
-            'Are you sure you want to delete this category?'
-        )) {
-
-            event.preventDefault();
-
-        }
-
-    });
-
-});
-
-/*
-|--------------------------------------------------------------------------
-| Live Search (Client Side)
+| Live Search
 |--------------------------------------------------------------------------
 */
 
@@ -496,22 +577,49 @@ if (searchInput) {
 
 /*
 |--------------------------------------------------------------------------
-| Highlight Active Menu
+| Confirm Delete
 |--------------------------------------------------------------------------
 */
 
-document.querySelectorAll('.mk-sidebar a').forEach(link => {
+document.querySelectorAll('.btn-delete').forEach(button => {
 
-    link.classList.remove('active');
+    button.addEventListener('click', function (event) {
 
-    if (link.getAttribute('href') === 'categories.php') {
+        if (!confirm(
+            'Are you sure you want to delete this category?'
+        )) {
 
-        link.classList.add('active');
+            event.preventDefault();
 
-    }
+        }
+
+    });
 
 });
+
+/*
+|--------------------------------------------------------------------------
+| Auto Hide Flash Message
+|--------------------------------------------------------------------------
+*/
+
+const flashAlert = document.querySelector('.alert');
+
+if (flashAlert) {
+
+    setTimeout(() => {
+
+        flashAlert.classList.add('fade');
+
+        setTimeout(() => {
+
+            flashAlert.remove();
+
+        }, 300);
+
+    }, 3000);
+
+}
 </script>
 
-<?php
-require_once __DIR__ . '/../layouts/dashboard/footer.php';
+<?php require_once __DIR__ . '/../../layouts/dashboard/footer.php'; ?>

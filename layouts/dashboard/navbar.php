@@ -103,7 +103,7 @@ $user = $_SESSION['user'];
 
                     <a
                         class="dropdown-item"
-                        href="profile.php">
+                        href="<?= route('profile.index') ?>">
 
                         <i class="bi bi-person me-2"></i>
 
@@ -117,7 +117,7 @@ $user = $_SESSION['user'];
 
                     <a
                         class="dropdown-item"
-                        href="settings.php">
+                        href="<?= route('profile.index') ?>">
 
                         <i class="bi bi-gear me-2"></i>
 
@@ -133,7 +133,7 @@ $user = $_SESSION['user'];
 
                     <a
                         class="dropdown-item text-danger"
-                        href="../logout.php">
+                        href="<?= route('logout') ?>">
 
                         <i class="bi bi-box-arrow-right me-2"></i>
 

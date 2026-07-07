@@ -20,63 +20,47 @@ $pageTitle = $pageTitle ?? APP_NAME;
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>
+    <title>
 
-<?= e($pageTitle) ?>
+        <?= e($pageTitle) ?>
 
-</title>
+    </title>
 
-<!-- Bootstrap -->
+    <!-- Bootstrap -->
 
-<link
-href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Bootstrap Icons -->
+    <!-- Bootstrap Icons -->
 
-<link
-href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
-<!-- Google Font -->
+    <!-- Google Font -->
 
-<link
-rel="preconnect"
-href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link
-rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap"
-rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
-<!-- Dashboard CSS -->
+    <!-- Dashboard CSS -->
 
-<link
-rel="stylesheet"
-href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?= asset('css/dashboardd.css') ?>">
 
-<link
-rel="stylesheet"
-href="../assets/css/app.css">
+    <link rel="stylesheet" href="<?= asset('css/app.css') ?>">
 
 </head>
 
 <body>
 
-<div class="mk-dashboard">
+    <div class="mk-dashboard">
 
-<?php require __DIR__ . '/sidebar.php'; ?>
+        <?php require __DIR__ . '/sidebar.php'; ?>
 
-<div class="mk-main">
+        <div class="mk-main">
 
-<?php require __DIR__ . '/navbar.php'; ?>
+            <?php require __DIR__ . '/navbar.php'; ?>

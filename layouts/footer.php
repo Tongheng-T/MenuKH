@@ -16,7 +16,7 @@
 <!-- Main JS -->
 <script src="<?= asset('js/app.js'); ?>"></script>
 
-<?php if ($flash = flash()): ?>
+<?php if ($flash = getFlash()): ?>
 
 <script>
 

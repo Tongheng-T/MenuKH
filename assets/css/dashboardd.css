@@ -193,3 +193,35 @@ padding:20px;
 }
 
 }
+
+/* ==========================================
+   Dashboard Cards
+========================================== */
+
+.welcome-card{
+    background:linear-gradient(135deg,#2563EB,#1D4ED8);
+    color:#fff;
+    border-radius:20px;
+    padding:35px;
+    box-shadow:0 10px 30px rgba(37,99,235,.25);
+}
+
+.stat-card{
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
+    transition:.25s;
+}
+
+.stat-card:hover{
+    transform:translateY(-5px);
+}
+
+.check-card,
+.activity-card{
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
+}

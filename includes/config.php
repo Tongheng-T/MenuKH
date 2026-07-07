@@ -20,7 +20,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 define('APP_NAME', 'MenuKH');
 define('APP_VERSION', '1.0.0');
-define('APP_URL', 'http://localhost/MenuKH');
+define('APP_URL', 'http://th.com/MenuKH');
 
 /*
 |--------------------------------------------------------------------------

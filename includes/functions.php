@@ -62,7 +62,7 @@ function randomString(int $length = 32): string
 function setFlash(string $type, string $message): void
 {
     $_SESSION['flash'] = [
-        'type'    => $type,
+        'type' => $type,
         'message' => $message
     ];
 }
@@ -91,21 +91,6 @@ function old(string $key, $default = '')
     return $_POST[$key] ?? $default;
 }
 
-/**
- * Current User
- */
-function user(): ?array
-{
-    return $_SESSION['user'] ?? null;
-}
-
-/**
- * Login Check
- */
-function isLoggedIn(): bool
-{
-    return isset($_SESSION['user']);
-}
 
 /**
  * Debug
@@ -116,4 +101,58 @@ function dd($data): void
     print_r($data);
     echo '</pre>';
     exit;
+}
+
+
+
+
+// ////////////////////////
+
+/*
+|--------------------------------------------------------------------------
+| Get Flash Message
+|--------------------------------------------------------------------------
+*/
+
+function getFlash(): ?array
+{
+
+    if (!isset($_SESSION['flash'])) {
+
+        return null;
+
+    }
+
+    $flash = $_SESSION['flash'];
+
+    unset($_SESSION['flash']);
+
+    return $flash;
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| Has Flash
+|--------------------------------------------------------------------------
+*/
+
+function hasFlash(): bool
+{
+
+    return isset($_SESSION['flash']);
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| Clear Flash
+|--------------------------------------------------------------------------
+*/
+
+function clearFlash(): void
+{
+
+    unset($_SESSION['flash']);
+
 }

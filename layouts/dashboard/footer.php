@@ -42,10 +42,9 @@
 
 <!-- Dashboard JS -->
 
-<script src="../assets/js/dashboard.js"></script>
+<script src="<?= asset('js/dashboard.js') ?>"></script>
 
 <script>
-
 /*
 |--------------------------------------------------------------------------
 | Sidebar Toggle
