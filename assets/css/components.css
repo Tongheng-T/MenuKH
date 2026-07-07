@@ -1,0 +1,212 @@
+/*
+==========================================================
+MenuKH
+Components
+----------------------------------------------------------
+File : assets/css/components.css
+Version : 1.0.0
+Author : Tong Heng
+==========================================================
+*/
+
+/* =======================================================
+   Card
+======================================================= */
+
+.mk-card{
+
+    background:var(--mk-white);
+
+    border:1px solid var(--mk-border);
+
+    border-radius:var(--mk-radius);
+
+    box-shadow:var(--mk-shadow);
+
+    transition:var(--mk-transition);
+
+    overflow:hidden;
+
+}
+
+.mk-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--mk-shadow-lg);
+
+}
+
+.mk-card-header{
+
+    padding:20px 25px;
+
+    border-bottom:1px solid var(--mk-border);
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+.mk-card-body{
+
+    padding:25px;
+
+}
+
+.mk-card-footer{
+
+    padding:18px 25px;
+
+    border-top:1px solid var(--mk-border);
+
+}
+
+/* =======================================================
+   Section Title
+======================================================= */
+
+.mk-section-title{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:var(--mk-dark);
+
+    margin-bottom:20px;
+
+}
+
+/* =======================================================
+   Badge
+======================================================= */
+
+.mk-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:6px 14px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.mk-badge-success{
+
+    background:#DCFCE7;
+
+    color:#15803D;
+
+}
+
+.mk-badge-warning{
+
+    background:#FEF3C7;
+
+    color:#B45309;
+
+}
+
+.mk-badge-danger{
+
+    background:#FEE2E2;
+
+    color:#B91C1C;
+
+}
+
+.mk-badge-primary{
+
+    background:#DBEAFE;
+
+    color:#1D4ED8;
+
+}
+
+/* =======================================================
+   Avatar
+======================================================= */
+
+.mk-avatar{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:var(--mk-primary);
+
+    color:#fff;
+
+    font-weight:700;
+
+}
+
+/* =======================================================
+   Divider
+======================================================= */
+
+.mk-divider{
+
+    border:none;
+
+    border-top:1px solid var(--mk-border);
+
+    margin:20px 0;
+
+}
+
+/* =======================================================
+   Empty State
+======================================================= */
+
+.mk-empty{
+
+    text-align:center;
+
+    padding:50px 20px;
+
+}
+
+.mk-empty i{
+
+    font-size:60px;
+
+    color:#CBD5E1;
+
+    margin-bottom:20px;
+
+}
+
+.mk-empty h4{
+
+    font-size:22px;
+
+    margin-bottom:10px;
+
+    color:var(--mk-dark);
+
+}
+
+.mk-empty p{
+
+    color:var(--mk-gray);
+
+}
