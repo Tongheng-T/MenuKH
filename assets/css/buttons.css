@@ -1,0 +1,184 @@
+/*
+==========================================================
+MenuKH
+Buttons
+----------------------------------------------------------
+File : assets/css/buttons.css
+Version : 1.0.0
+Author : Tong Heng
+==========================================================
+*/
+
+/* ==========================================
+   Base Button
+========================================== */
+
+.mk-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    border:none;
+
+    cursor:pointer;
+
+    border-radius:var(--mk-radius-sm);
+
+    padding:12px 22px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:var(--mk-transition);
+
+}
+
+/* ==========================================
+   Primary
+========================================== */
+
+.mk-btn-primary{
+
+    background:var(--mk-primary);
+
+    color:#fff;
+
+}
+
+.mk-btn-primary:hover{
+
+    background:var(--mk-primary-hover);
+
+    color:#fff;
+
+}
+
+/* ==========================================
+   Success
+========================================== */
+
+.mk-btn-success{
+
+    background:var(--mk-success);
+
+    color:#fff;
+
+}
+
+.mk-btn-success:hover{
+
+    filter:brightness(.95);
+
+}
+
+/* ==========================================
+   Warning
+========================================== */
+
+.mk-btn-warning{
+
+    background:var(--mk-warning);
+
+    color:#fff;
+
+}
+
+.mk-btn-warning:hover{
+
+    filter:brightness(.95);
+
+}
+
+/* ==========================================
+   Danger
+========================================== */
+
+.mk-btn-danger{
+
+    background:var(--mk-danger);
+
+    color:#fff;
+
+}
+
+.mk-btn-danger:hover{
+
+    filter:brightness(.95);
+
+}
+
+/* ==========================================
+   Outline
+========================================== */
+
+.mk-btn-outline{
+
+    background:#fff;
+
+    border:1px solid var(--mk-border);
+
+    color:var(--mk-dark);
+
+}
+
+.mk-btn-outline:hover{
+
+    background:var(--mk-light);
+
+}
+
+/* ==========================================
+   Light
+========================================== */
+
+.mk-btn-light{
+
+    background:var(--mk-light);
+
+    color:var(--mk-dark);
+
+}
+
+.mk-btn-light:hover{
+
+    background:#E2E8F0;
+
+}
+
+/* ==========================================
+   Sizes
+========================================== */
+
+.mk-btn-sm{
+
+    padding:8px 14px;
+
+    font-size:13px;
+
+}
+
+.mk-btn-lg{
+
+    padding:15px 28px;
+
+    font-size:16px;
+
+}
+
+/* ==========================================
+   Block
+========================================== */
+
+.mk-btn-block{
+
+    width:100%;
+
+}
