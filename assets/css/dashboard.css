@@ -1,0 +1,195 @@
+.mk-sidebar{
+    width:260px;
+    background:#0F172A;
+    min-height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    padding:25px;
+}
+
+.mk-sidebar-logo a{
+    color:#fff;
+    font-size:28px;
+    font-weight:700;
+    text-decoration:none;
+}
+
+.mk-sidebar-logo span{
+    color:#FDBA74;
+}
+
+.mk-sidebar-menu{
+    margin-top:40px;
+}
+
+.mk-sidebar-menu a,
+.mk-sidebar-footer a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:13px 16px;
+
+    border-radius:12px;
+
+    color:#CBD5E1;
+
+    text-decoration:none;
+
+    margin-bottom:8px;
+
+    transition:.25s;
+
+}
+
+.mk-sidebar-menu a:hover,
+.mk-sidebar-menu a.active{
+
+    background:#2563EB;
+
+    color:#fff;
+
+}
+
+.mk-sidebar-footer{
+
+    margin-top:40px;
+
+}
+
+/*  */
+.mk-navbar{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:18px 25px;
+
+    margin-bottom:25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+
+}
+
+.mk-navbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.mk-navbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.mk-sidebar-toggle{
+
+    border:none;
+
+    background:none;
+
+    font-size:26px;
+
+    display:none;
+
+}
+
+@media(max-width:992px){
+
+    .mk-sidebar-toggle{
+
+        display:block;
+
+    }
+
+}
+
+.mk-dashboard{
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+.mk-main{
+
+    flex:1;
+
+    margin-left:260px;
+
+    padding:30px;
+
+    background:#F8FAFC;
+
+}
+
+@media(max-width:992px){
+
+.mk-main{
+
+margin-left:0;
+
+padding:20px;
+
+}
+
+}
+
+
+/*  */
+.mk-footer{
+
+    margin-top:40px;
+
+    padding:20px;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+
+    color:#64748B;
+
+}
+
+@media(max-width:992px){
+
+.mk-sidebar{
+
+    transform:translateX(-100%);
+
+    transition:.3s;
+
+    z-index:1050;
+
+}
+
+.mk-sidebar.show{
+
+    transform:translateX(0);
+
+}
+
+}
